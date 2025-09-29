@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms and Conditions</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <style>
+    body { color:#171616; }
+    .modal { width: 60%; background: #fff; padding: 25px; border-radius: 10px; margin: 100px auto; text-align: left; box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
+    .modal h2 { text-align: center; margin-bottom: 15px; color:#0d1b2a; }
+    .modal .buttons { display:flex; justify-content:center; gap:20px; }
+    .modal .accept { background:#2c2cff; color:#fff; }
+    .modal .decline { background:#ccc; }
+  </style>
+</head>
+<body class="gradient-bg">
+  <nav class="navbar">
+    <div class="nav-left nav-brand" onclick="location.href='/'" style="cursor:pointer">
+      <img src="/static/images/icon.png" alt="DocIntel" />
+      <span>DocIntel</span>
+    </div>
+    <div class="nav-links">
+      <a href="/upload">Upload</a>
+      <a href="/extract">Extract</a>
+    </div>
+  </nav>
+  <div class="page">
+    <div class="modal" id="termsModal">
+      <h2>Terms and conditions</h2>
+      <p>When creating a Terms and Conditions content template, it is essential to include the following key elements:</p>
+      <ul>
+        <li><b>Agreement Clause:</b> Users must agree to the terms to access the service.</li>
+        <li><b>Content Ownership:</b> Website's content is owned by the owner and cannot be reused without permission.</li>
+        <li><b>Liability Clause:</b> The website is not responsible for user-generated content.</li>
+        <li><b>Prohibited Activities:</b> Activities like fraud, abuse, or violations are not allowed.</li>
+        <li><b>Punishment for Violations:</b> Violations may lead to restrictions or termination.</li>
+        <li><b>Updates:</b> Terms will be updated with changes in business or law.</li>
+      </ul>
+      <div class="checkbox">
+        <input type="checkbox" id="agreeCheck">
+        <label for="agreeCheck">I have read the terms and conditions</label>
+      </div>
+      <div class="buttons">
+        <button class="accept" id="acceptBtn" disabled>Accept</button>
+        <button class="decline" id="declineBtn">Decline</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    const checkbox = document.getElementById("agreeCheck");
+    const acceptBtn = document.getElementById("acceptBtn");
+    const declineBtn = document.getElementById("declineBtn");
+    checkbox.addEventListener("change", () => { acceptBtn.disabled = !checkbox.checked; });
+    acceptBtn.addEventListener("click", () => { const form = document.createElement('form'); form.method='POST'; form.action='/terms/accept'; document.body.appendChild(form); form.submit(); });
+    declineBtn.addEventListener("click", () => { window.location.href = '/logout'; });
+  </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Page</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <script>document.addEventListener('DOMContentLoaded',()=>{const e=document.getElementById('file-input'),t=document.getElementById('chooseBtn'),n=document.getElementById('submitBtn'),a=document.getElementById('fileName'),d=document.getElementById('uploadForm'),o=document.getElementById('errorBox');function r(e){o.textContent=e||''}t.addEventListener('click',(()=>{r(''),e.click()})),e.addEventListener('change',(()=>{if(r(''),!e.files||0===e.files.length)return a.textContent='No file chosen',void(n.disabled=!0);const t=e.files[0];a.textContent=t.name;const d=t.name.toLowerCase().endsWith('.zip');n.disabled=!d,d||r('Only .zip files are allowed.')})),d.addEventListener('submit',(async t=>{if(t.preventDefault(),r(''),!e.files||0===e.files.length)return void r('Please select a .zip file first.');const a=e.files[0];if(!a.name.toLowerCase().endsWith('.zip'))return void r('Only .zip files are allowed.');n.disabled=!0,n.textContent='Processing...';try{const e=new FormData;e.append('file',a);const t=await fetch('/upload',{method:'POST',body:e,headers:{'X-Requested-With':'fetch'}});if(!t.ok){const e=await t.text();throw new Error(e||'Upload failed')}window.location.href='/extract'}catch(e){r(e.message||'Upload failed')}finally{n.disabled=!1,n.textContent='Upload and Process'}}))});</script>
+</head>
+<body class="gradient-bg">
+  <nav class="navbar">
+    <div class="nav-left nav-brand" onclick="location.href='/'" style="cursor:pointer">
+      <img src="/static/images/icon.png" alt="DocIntel" />
+      <span>DocIntel</span>
+    </div>
+    <div class="nav-links">
+      <a href="/upload">Upload</a>
+      <a href="/extract">Extract</a>
+      <a href="/analysis">Analysis</a>
+      <a href="/logout">Logout</a>
+    </div>
+  </nav>
+  <div class="page">
+    <div class="main-container">
+      <div class="image-section">
+        <img src="/static/images/2.png" alt="Side Image">
+      </div>
+      <div class="upload-container">
+        <h2>UPLOAD</h2>
+        <div class="upload-box">
+          <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
+            <div style="display:flex; gap:10px; align-items:center; justify-content:center; margin-bottom:10px;">
+              <input type="file" id="file-input" name="file" accept=".zip" style="display:none;">
+              <button class="upload-btn" id="chooseBtn" type="button">Choose ZIP</button>
+              <span id="fileName" style="font-size:0.9rem; color:#555;">No file chosen</span>
+            </div>
+            <button class="upload-btn" type="submit" id="submitBtn" disabled>Upload and Process</button>
+            <div id="errorBox" class="error" style="margin-top:10px;"></div>
+          </form>
+        </div>
+        <div class="bottom-buttons">
+          <button class="action-btn" type="button" onclick="window.location.href='/analysis'">Analyse Data</button>
+          <button class="action-btn" type="button" onclick="window.location.href='/extract'">Extract Data</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+

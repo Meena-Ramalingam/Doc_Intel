@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Extracted Data</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <style>
+    .card { background:#fff; padding:32px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.2); max-width:1200px; width:90%; margin:auto; }
+    h2 { margin-bottom:16px; color:#0d1b2a; }
+    .table-wrap { overflow:auto; }
+    table { width:100%; border-collapse:collapse; background:#fff; }
+    th, td { padding:10px 12px; border-bottom:1px solid #e5e7eb; text-align:left; font-size:14px; }
+    th { background:#0d1b2a; color:#fff; position:sticky; top:0; }
+    tr:hover { background:#f9fafb; }
+    .actions { margin-top:16px; display:flex; gap:12px; }
+  </style>
+</head>
+<body class="gradient-bg">
+  <nav class="navbar">
+    <div class="nav-left nav-brand" onclick="location.href='/'" style="cursor:pointer">
+      <img src="/static/images/icon.png" alt="DocIntel" />
+      <span>DocIntel</span>
+    </div>
+    <div class="nav-links">
+      <a href="/upload">Upload</a>
+      <a href="/extract">Extract</a>
+      <a href="/analysis">Analysis</a>
+      <a href="/logout">Logout</a>
+    </div>
+  </nav>
+  <div class="page">
+    <div class="card">
+      <h2>Extracted Data</h2>
+      {% if data and data|length > 0 %}
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Filename</th>
+              <th>Category</th>
+              <th>Confidence</th>
+              <th>Fields</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for rec in data %}
+            <tr>
+              <td>{{ loop.index }}</td>
+              <td>{{ rec.filename or rec["filename"] }}</td>
+              <td>{{ rec.category or rec["category"] }}</td>
+              <td>{{ rec.classification_confidence or rec["classification_confidence"] }}</td>
+              <td>
+                {% set fields = rec.extracted_fields or rec["extracted_fields"] %}
+                {% if fields %}
+                  {% for k, v in fields.items() %}
+                    <div><strong>{{ k }}</strong>: {{ v }}</div>
+                  {% endfor %}
+                {% else %}
+                  <span style="color:#6b7280;">N/A</span>
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+        <p>This page will display the extracted fields after processing your ZIP.</p>
+        <p>Use the Upload page to process a ZIP and download the CSV.</p>
+      {% endif %}
+      <div class="actions">
+        <button class="action-btn" onclick="window.location.href='/upload'">Go to Upload</button>
+        <button class="upload-btn" onclick="window.location.href='/download.csv'">Download CSV</button>
+        <button class="action-btn" onclick="window.location.href='/analysis'">Analysis</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

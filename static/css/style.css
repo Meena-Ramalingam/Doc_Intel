@@ -1,0 +1,135 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Page background */
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(120deg, #ce9df6, #db69f8, #d704f3);
+  }
+  
+  
+  
+  /* Main container */
+  .main-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    max-width: 1200px;
+    width: 90%;
+  }
+  
+  /* Left side image (no box, no shadow) */
+  .image-section img {
+    max-width: 600px;
+    height: auto;
+    display: block;
+  }
+  
+  /* Right side upload container */
+  .upload-container {
+    background: #fff;
+    padding: 40px 60px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
+  
+  .upload-container h2 {
+    margin-bottom: 20px;
+  }
+  
+  /* Upload Box */
+  .upload-box {
+    border: 2px dashed #aaa;
+    padding: 70px 70px;
+    text-align: center;
+    border-radius: 10px;
+    background: #fff;
+    margin-bottom: 20px;
+  }
+  
+  .upload-box p {
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+  
+  .upload-box .browse {
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  .upload-btn {
+    background: #007bff;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  
+  .upload-btn:hover {
+    background: #0056b3;
+  }
+  
+  /* Bottom Buttons */
+  .bottom-buttons {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .action-btn {
+    background: #f5f5f5;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  
+  .action-btn:hover {
+    background: #ddd;
+  }
+
+/* Shared cards and tables */
+.card { background:#fff; padding:32px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.2); }
+.table-wrap { overflow:auto; }
+table { width:100%; border-collapse:collapse; background:#fff; }
+th, td { padding:10px 12px; border-bottom:1px solid #e5e7eb; text-align:left; font-size:14px; }
+th { background:#0d1b2a; color:#fff; position:sticky; top:0; }
+tr:hover { background:#f9fafb; }
+
+/* Global navbar */
+.navbar { position: fixed; top: 0; left: 0; right: 0; height: 72px; display: flex; align-items: center; justify-content: space-between; padding: 0 28px; background: #ffffff; border-bottom: 1px solid #e5e7eb; z-index: 1000; }
+.nav-left { display:flex; align-items:center; gap:12px; }
+.nav-brand { display:flex; align-items:center; gap:12px; font-weight: 800; color:#111111; text-decoration:none; }
+.nav-brand img { height:48px; width:48px; object-fit: contain; }
+.nav-links { display:flex; gap: 18px; }
+.nav-links a { color:#111111; text-decoration:none; font-weight:700; }
+
+/* Page wrapper to account for fixed navbar */
+.page { padding-top: 96px; min-height: 100vh; display:flex; align-items:center; justify-content:center; }
+
+/* Keep background consistent with upload */
+body.gradient-bg { background: linear-gradient(120deg, #e9c7ff, #dd7df9, #d704f3); }
+
+/* Ensure main-container respects navbar */
+.main-container { margin-top: 40px; }
